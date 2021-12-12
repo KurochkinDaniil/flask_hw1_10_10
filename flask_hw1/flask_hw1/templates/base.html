@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title> {% block title %}{% endblock %}</title>
+</head>
+<body>
+
+    <div>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+          <div class="container">
+            <a class="navbar-brand" href="{{ url_for('index') }}">Site</a>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+              <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    {% if logged %}
+                        <a class="nav-link" href="{{ url_for('all_posts') }}"> My posts </a>
+                    {% endif %}
+                </li>
+                <li class="nav-item">
+                    {% if logged %}
+                        <a class="nav-link" href="{{ url_for('add_post') }}"> Add post </a>
+                    {% else %}
+                        <a class="nav-link" href="{{ url_for('log_in') }}"> Login </a>
+                    {% endif %}
+                </li>
+                <li class="nav-item">
+                    {% if logged %}
+                        <a class="nav-link" href="{{ url_for('log_out') }}">Log out</a>
+                    {% else %}
+                        <a class="nav-link" href="{{ url_for('sign_up') }}">Sign up</a>
+                    {% endif %}
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+    </div> <br> <br>
+
+    {% block header %}
+    {% endblock %}
+
+    <ul>
+        {% for m in menu %}
+        <li>{{ m }}</li>
+        {% endfor %}
+    </ul>
+
+    {% for m in menu_url %}
+        <a href="{{ url_for(m.url) }}">{{ m.title }}</a>
+    {% endfor %}
+
+    {% if logged %}
+        <a href="{{ url_for('profile', username='Daniil')}}">User Daniil</a>
+    {% endif %}
+
+    {% block content %}
+    {% endblock %}
+
+</body>
+</html>

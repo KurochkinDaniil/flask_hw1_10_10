@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+    Sign up
+{% endblock %}
+
+{% block header %}
+    <h1> Sign up</h1>
+{% endblock %}
+
+{% block content %}
+    <hr>
+    {% for category, message in get_flashed_messages(True) %}
+        <p class="{{ category }}">{{ message }}</p>
+    {% endfor %}
+
+    <form action="{{ url_for('sign_up')}}" method="post">
+        <input type="text" name="email" placeholder="email">
+        <input type="password" name="password" placeholder="password">
+        <input type="password" name="password2" placeholder="repeat password">
+
+        <input type="submit" value="Sign up">
+    </form>
+
+    <p> Have already registered? <a href="{{ url_for('log_in') }}">Login</a></p>
+{% endblock %}
